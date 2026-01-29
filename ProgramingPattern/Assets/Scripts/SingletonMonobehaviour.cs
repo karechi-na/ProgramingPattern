@@ -5,6 +5,9 @@ using UnityEngine;
 /// Singleton抽象クラス
 /// </summary>
 // テンプレートをMonoBehaviourに制限
+// where：条件を指定するときに使う
+// T　　：テンプレートのT。Tと書けばテンプレートが使える
+// MonoBehaviour：テンプレートで指定するクラスの条件
 public abstract class SingletonMonobehaviour<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T instance;
@@ -84,3 +87,34 @@ public abstract class SingletonMonobehaviour<T> : MonoBehaviour where T : MonoBe
 //  -> 抽象クラスはインスタンス化されないけど、共通で使えるメソッド実装持たせたい
 //　　　-> 派生クラスでは必要に応じて上書きできる
 // 柔軟な拡張性を持つ
+
+// Singleton
+// 「クラスのインスタンスを必ず1つだけに制限し、どこからでも同じインスタンスにアクセスできるようにする」
+// 　設計パターン
+// 
+// メリット
+// 1. グローバルに1つだけ存在する保証
+// 　　→設定値や共有状態を安全に保てる
+// 　　→参照先が明確
+// 
+// 2. アクセスが簡単
+// 　　→Factory等が不要で手軽
+// 
+// 3. 状態共有が容易
+// 　　→ログ、キャッシュ、接続管理に向いている
+// 
+// デメリット
+// 1. グローバル変数と同じ問題を持つ
+// 　　→どこからでも触れる
+// 　　→変更影響が追いにくい
+// 
+// 2. テストがしにくい
+// 　　→状態が残りやすい
+// 
+// 3. 責務が肥大化しやすい
+// 　　→「とりあえずSingleton」にしがち
+// 　　→神クラス化の温床
+// 
+// 4. ライフサイクル制御が難しい
+// 　　→明示的に破棄できない
+// 　　→再初期化が面倒
